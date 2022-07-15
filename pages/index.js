@@ -7,7 +7,7 @@ export default function Home() {
     <main className="h-screen flex flex-col text-white bg-black">
       <h1 className="text-4xl md:text-6xl font-medium ml-4 mt-4">
         <Link href="/resume">
-          <a className="transition duration-300 ease-in-out hover:text-sky-500">
+          <a className="transition duration-300 ease-in-out hover:text-indigo-500">
             Yosh _
           </a>
         </Link>
@@ -53,7 +53,7 @@ export default function Home() {
         </ul>
         <div className="pb-1 md:pb-0"></div>
         <ul className="text-xs md:text-base flex flex-row tracking-tight md:tracking-normal space-x-1 md:space-x-2">
-          <li className="transition duration-300 ease-in-out hover:text-pink-500">
+          <li className="transition duration-300 ease-in-out hover:text-blue-500">
             <Link href="/music">
               <a>[ music ]</a>
             </Link>
@@ -67,7 +67,7 @@ export default function Home() {
               [ tweets ]
             </a>
           </li>
-          <li className="transition duration-300 ease-in-out hover:text-blue-500">
+          <li className="transition duration-300 ease-in-out hover:text-pink-500">
             <a
               href="https://yungyosh.substack.com/"
               target="_blank"

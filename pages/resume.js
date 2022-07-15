@@ -3,10 +3,9 @@ import Link from "next/link";
 
 const Resume = () => {
   return (
-    <div className="px-8 pt-32 flex flex-col text-white bg-black md:px-32 lg:px-64">
-      <h3 className="text-3xl text-indigo-500 font-medium mb-3">[ resume ]</h3>
-      <p className="text-lg">Jordan Falcon | Software Engineer</p>
-      <h3 className="text-2xl text-indigo-500 font-medium mt-8 mb-3">
+    <div className="h-screen flex flex-col text-white bg-black pl-4 pt-4">
+      <h3 className="text-4xl md:text-5xl font-medium">Resume_</h3>
+      <h3 className="text-xl text-indigo-500 font-medium mt-8 mb-2">
         [ work experience ]
       </h3>
       <h4 className="text-lg text-medium mb-1">Forum Communications</h4>
@@ -21,20 +20,20 @@ const Resume = () => {
       <p className="text-sm font-light text-gray-400">
         Data Architect Intern // 2016 to 2017
       </p>
-      <h3 className="text-2xl text-indigo-500 font-medium mt-8 mb-3">
+      <h3 className="text-xl text-indigo-500 font-medium mt-4 mb-2">
         [ preferred tools ]
       </h3>
       <p className="text-sm font-light text-gray-400">
         JavaScript, HTML, CSS, Figma, Node, Git, GitHub
       </p>
-      <h3 className="text-2xl text-indigo-500 font-medium mt-8 mb-3">
+      <h3 className="text-xl text-indigo-500 font-medium mt-4 mb-2">
         [ previously used tools ]
       </h3>
       <p className="text-sm text-gray-400">
         Python, Java, Twig, Handlebars, React, SQL, GraphQL, Sketch/Adobe XD,
         Kibana
       </p>
-      <h3 className="text-2xl text-indigo-500 font-medium mt-8 mb-2">
+      <h3 className="text-xl text-indigo-500 font-medium mt-4 mb-2">
         [ education ]
       </h3>
       <h4 className="text-lg font-medium mb-1">
@@ -47,7 +46,7 @@ const Resume = () => {
       <p className="text-sm text-gray-400">
         Information Technology // 2012 to 2014
       </p>
-      <h3 className="text-2xl text-indigo-500 font-medium mt-8 mb-2">
+      <h3 className="text-xl text-indigo-500 font-medium mt-4 mb-2">
         [ contact ]
       </h3>
       <ul className="text-base flex flex-row mt-1 space-x-5 md:space-x-6 mb-8">
@@ -82,7 +81,7 @@ const Resume = () => {
           </a>
         </li>
       </ul>
-      <h3 className="text-lg text-indigo-500 font-medium mb-32">
+      <h3 className="text-lg mt-auto text-indigo-500 font-medium mb-4">
         <Link href="/">
           <a className="transition duration-300 ease-in-out hover:text-white">
             [ 🏠 ]
