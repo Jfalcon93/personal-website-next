@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Resume = () => {
   return (
-    <div className="h-screen flex flex-col text-white bg-black pl-4 pt-4">
+    <div className="min-h-screen flex flex-col text-white bg-black pl-4 pt-4">
       <h3 className="text-4xl md:text-6xl font-medium">Resume_</h3>
       <h3 className="text-lg md:text-xl text-indigo-500 font-medium mt-8 mb-2">
         [ work experience ]
@@ -54,14 +54,14 @@ const Resume = () => {
         [ projects ]
       </h3>
       <ul className="text-sm md:text-base flex flex-row mt-1 space-x-5 md:space-x-6 mb-2">
+        <li className="underline transition duration-300 ease-in-out hover:text-sky-500">
+          <a href="https://hotnewtweethop.vercel.app/">hotnewtweethop</a>
+        </li>
         <li className="underline transition duration-300 ease-in-out hover:text-blue-500">
           <a href="https://nba-scoreboard.vercel.app/">nba scoreboard</a>
         </li>
         <li className="underline transition duration-300 ease-in-out hover:text-indigo-500">
           <a href="https://baseball-mvps.vercel.app/">mlb mvps</a>
-        </li>
-        <li className="underline transition duration-300 ease-in-out hover:text-purple-500">
-          <a href="https://colordex.herokuapp.com/">colordex</a>
         </li>
       </ul>
       <h3 className="text-lg md:text-xl text-indigo-500 font-medium mt-4 mb-2">
