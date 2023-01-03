@@ -23,6 +23,16 @@ export default function Home() {
           <li className="transition duration-300 ease-in-out hover:text-pink-500">
             <a
               className="underline decoration-pink-500"
+              href="https://mirror.xyz/0xc1000fD7dd1E016Eeb4c6EBEBB0705c1310B8c7f/xOQmiji_eiQ8UtDutTxBcpV21gpt0MbWBj_8q0UcG4A"
+              target="_blank"
+              rel="noreferrer"
+            >
+              best songs, 2022
+            </a>
+          </li>
+          <li className="transition duration-300 ease-in-out hover:text-pink-500">
+            <a
+              className="underline decoration-indigo-500"
               href="https://mirror.xyz/0xc1000fD7dd1E016Eeb4c6EBEBB0705c1310B8c7f/_kJBooWM6iTZmZZKo_QDUjnXlzzD2Mco20Kl1SBnFIc"
               target="_blank"
               rel="noreferrer"
@@ -32,22 +42,12 @@ export default function Home() {
           </li>
           <li className="transition duration-300 ease-in-out hover:text-indigo-500">
             <a
-              className="underline decoration-indigo-500"
+              className="underline decoration-blue-500"
               href="https://yungyosh.substack.com/p/2020-projects-list?r=3hjnu&utm_campaign=post&utm_medium=web"
               target="_blank"
               rel="noreferrer"
             >
               best projects, 2020
-            </a>
-          </li>
-          <li className="transition duration-300 ease-in-out hover:text-blue-500">
-            <a
-              className="underline decoration-blue-500"
-              href="https://yungyosh.substack.com/p/2019-projects-list?r=3hjnu&utm_campaign=post&utm_medium=web"
-              target="_blank"
-              rel="noreferrer"
-            >
-              best projects, 2019
             </a>
           </li>
         </ul>
