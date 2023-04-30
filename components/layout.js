@@ -4,7 +4,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-        <title>Jordan Falcon</title>
+        <title>yungyoshh</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
