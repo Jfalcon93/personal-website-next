@@ -2,7 +2,7 @@ import Head from "next/head";
 
 export default function Footer({ items }) {
   return (
-    <div className="sticky top-[100vh] pb-4 text-gray-400">
+    <div className="sticky top-[100vh] px-2 md:px-0 pb-4 text-gray-400">
       <ul className="text-xs md:text-base flex flex-row justify-between tracking-tight md:tracking-normal space-x-1 md:space-x-2">
         <li className="transition duration-300 ease-in-out hover:text-sky-500 hover:fill-sky-500">
           <a
