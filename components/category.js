@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Category({ category, filter, onPress }) {
   const colorObj = {
-    music: "bg-sky-200 hover:bg-sky-300",
+    music: "bg-sky-300 hover:bg-sky-400",
     books: "bg-cyan-200 hover:bg-cyan-300",
     writing: "bg-indigo-300 hover:bg-indigo-400",
     playlists: "bg-purple-300 hover:bg-purple-400",
