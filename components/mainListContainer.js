@@ -28,32 +28,33 @@ export default function MainListContainer({ items, category }) {
             initial="hidden"
             animate="show"
           >
-            {items
-              ?.filter((item, id) => id < 25)
-              .map((item, i) => {
-                return (
-                  <ListItem
-                    key={i}
-                    date={
-                      item.properties.Date.date != null
-                        ? item.properties.Date.date.start
-                        : ""
-                    }
-                    note={
-                      item.properties.Note.rich_text[0] != undefined
-                        ? item.properties.Note.rich_text[0].plain_text
-                        : ""
-                    }
-                    name={item.properties.Summary.title[0].plain_text}
-                    url={item.properties.URL.url}
-                    category={item.properties.Tags.multi_select}
-                    selectedCategory={category}
-                  />
-                );
-              })}
+            {items?.map((item, i) => {
+              return (
+                <ListItem
+                  key={i}
+                  date={
+                    item.properties.Date.date != null
+                      ? item.properties.Date.date.start
+                      : ""
+                  }
+                  note={
+                    item.properties.Note.rich_text[0] != undefined
+                      ? item.properties.Note.rich_text[0].plain_text
+                      : ""
+                  }
+                  name={item.properties.Summary.title[0].plain_text}
+                  url={item.properties.URL.url}
+                  category={item.properties.Tags.multi_select}
+                  selectedCategory={category}
+                />
+              );
+            })}
           </motion.ul>
         </AnimatePresence>
       )}
+      <div className="sticky top-[100vh] pt-2 pl-2 text-gray-400 w-fit md:text-sm text-xs">
+        total: {items?.length}
+      </div>
     </div>
   );
 }

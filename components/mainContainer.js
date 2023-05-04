@@ -69,7 +69,7 @@ export default function MainContainer() {
         <>Loading...</>
       ) : (
         <>
-          <div className="mb-3 mt-3 text-xs md:text-base">
+          <div className="mb-2 mt-2 md:mb-3 md:mt-3 text-xs md:text-base">
             {categories?.properties.Tags.multi_select.options
               .filter(
                 (category) =>
@@ -86,7 +86,6 @@ export default function MainContainer() {
                 );
               })}
           </div>
-
           <div className={lineColor}></div>
           <MainListContainer
             items={filteredItems}
@@ -97,5 +96,3 @@ export default function MainContainer() {
     </div>
   );
 }
-
-// !== undefined ? filteredItems : items?.results

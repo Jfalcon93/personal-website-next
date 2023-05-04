@@ -5,7 +5,7 @@ import MainContainer from "../components/mainContainer";
 
 export default function Home() {
   return (
-    <main className="pt-16 mx-6 min-h-screen">
+    <main className="pt-16 mx-3 md:mx-6 min-h-screen">
       <Header />
       <MainContainer />
       <Footer />

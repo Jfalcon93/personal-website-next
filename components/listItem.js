@@ -11,7 +11,7 @@ export default function ListItem({
   note,
 }) {
   const colorObj = {
-    music: "hover:underline hover:decoration-sky-300",
+    music: "hover:underline hover:decoration-sky-500",
     books: "hover:underline hover:decoration-cyan-300",
     writing: "hover:underline hover:decoration-indigo-400",
     playlists: "hover:underline hover:decoration-purple-400",
@@ -19,7 +19,7 @@ export default function ListItem({
     projects: "hover:underline hover:decoration-blue-400",
     anime: "hover:underline hover:decoration-red-300",
   };
-  const fixedClass = `px-2 py-0.5 truncate w-auto md:w-fit md:text-sm text-xs`;
+  const fixedClass = `px-2 py-0.5 md:w-fit md:text-sm text-xs`;
   let addSvg = "";
   if (name.includes("(Apple Music)")) {
     name = name.replace("(Apple Music)", "");
@@ -29,36 +29,40 @@ export default function ListItem({
     addSvg = "youtube";
   }
 
-  const listItem = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
-  };
+  const isMobile = window.innerWidth < 768;
+  let listItem, linkMotion, dateMotion;
+  if (!isMobile) {
+    listItem = {
+      hidden: { opacity: 0 },
+      show: { opacity: 1 },
+    };
 
-  const linkMotion = {
-    rest: {
-      paddingLeft: 0,
-    },
-    hover: {
-      paddingLeft: 4,
-      transition: {
-        duration: 0.2,
-        type: "tween",
-        ease: "easeOut",
+    linkMotion = {
+      rest: {
+        paddingLeft: 0,
       },
-    },
-  };
+      hover: {
+        paddingLeft: 4,
+        transition: {
+          duration: 0.2,
+          type: "tween",
+          ease: "easeOut",
+        },
+      },
+    };
 
-  const dateMotion = {
-    rest: { opacity: 0 },
-    hover: {
-      opacity: 1,
-      transition: {
-        duration: 0.2,
-        type: "tween",
-        ease: "easeIn",
+    dateMotion = {
+      rest: { opacity: 0 },
+      hover: {
+        opacity: 1,
+        transition: {
+          duration: 0.2,
+          type: "tween",
+          ease: "easeIn",
+        },
       },
-    },
-  };
+    };
+  }
 
   let formattedDate = (date) => {
     if (date === "") {
@@ -88,14 +92,14 @@ export default function ListItem({
       >
         <motion.span
           variants={dateMotion}
-          className="hidden pr-2 group-hover:inline text-gray-400"
+          className="md:hidden pr-2 md:group-hover:inline text-gray-400"
         >
           {formattedDate(date)}
         </motion.span>
         {name}
         <motion.span
           variants={dateMotion}
-          className="hidden pl-2 group-hover:inline text-gray-400"
+          className="hidden pl-2 md:group-hover:inline text-gray-400"
         >
           - {note}
         </motion.span>
