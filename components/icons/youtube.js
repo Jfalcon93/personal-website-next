@@ -1,6 +1,6 @@
 export default function Youtube({ category }) {
   const colorObj = {
-    music: "group-hover:fill-sky-200",
+    music: "group-hover:fill-sky-500",
     books: "group-hover:fill-cyan-200",
     writing: "group-hover:fill-indigo-300",
     playlists: "group-hover:fill-purple-300",
