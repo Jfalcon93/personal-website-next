@@ -15,6 +15,19 @@ export default async function handler(req, res) {
         },
       ],
     });
+    if (response.has_more) {
+      let additional = await notion.databases.query({
+        database_id: databaseId,
+        sorts: [
+          {
+            property: "Date",
+            direction: "descending",
+          },
+        ],
+        start_cursor: response.next_cursor,
+      });
+      response.results = [...response.results, ...additional.results];
+    }
     res.status(200).json(response);
   } catch (error) {
     console.error(error.body);

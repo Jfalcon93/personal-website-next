@@ -43,7 +43,11 @@ export default function MainListContainer({ items, category }) {
                         ? item.properties.Note.rich_text[0].plain_text
                         : ""
                     }
-                    name={item.properties.Summary.title[0].plain_text}
+                    name={
+                      item.properties.Summary.title[0] != undefined
+                        ? item.properties.Summary.title[0].plain_text
+                        : ""
+                    }
                     url={item.properties.URL.url}
                     category={item.properties.Tags.multi_select}
                     selectedCategory={category}
