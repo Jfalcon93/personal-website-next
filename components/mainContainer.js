@@ -22,13 +22,23 @@ export default function MainContainer() {
   const {
     data: categories,
     isLoading: categoriesLoading,
+    isValidating: categoriesValidating,
     error: categoriesError,
-  } = useSWR("/api/notion/database", fetcher);
+  } = useSWR("/api/notion/database", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
   const {
     data: items,
     isLoading: itemsLoading,
+    isValidating: itemsValidating,
     error: itemsError,
-  } = useSWR("api/notion/", fetcher);
+  } = useSWR("api/notion/", fetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
   const [filteredItems, setItems] = useState(items);
   const [selectedCategory, setCategory] = useState("");
   const [selectedColor, setColor] = useState("default");
