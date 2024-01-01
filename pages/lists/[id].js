@@ -40,9 +40,9 @@ export default function List({ html, title, socialImage }) {
       <div className="pt-16 mx-3 md:mx-6 min-h-screen">
         <Header />
         <div className="my-4 border border-gray-400 rounded-lg w-3 h-0.5"></div>
-        <h2 className="mt-4 mb-2 text-gray-500 text-sm">{title}</h2>
+        <h2 className="mt-4 mb-2 text-gray-500 text-xs md:text-sm">{title}</h2>
         <div
-          className="mb-6 text-sm"
+          className="mb-6 text-xs md:text-sm"
           dangerouslySetInnerHTML={{ __html: html }}
         ></div>
         <Footer />
