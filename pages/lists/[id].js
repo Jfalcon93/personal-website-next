@@ -35,7 +35,6 @@ export default function List({ html, title, socialImage }) {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:creator" content="@yungyoshh" />
         <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content="" />
         <meta name="twitter:image" content={socialImage} />
       </Head>
       <div className="pt-16 mx-3 md:mx-6 min-h-screen">
