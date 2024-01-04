@@ -52,26 +52,20 @@ export default function List({ html, title, socialImage }) {
 }
 
 export async function getStaticProps({ params }) {
-  let slugToId = {
-    bestsongs2021: {
-      id: "8eac270354ac486798b01ebff15d4e3a",
-      title: "Best Songs, 2021",
-      img: `${process.env.URL}/bestsongs2021.jpg`,
-    },
-    bestsongs2022: {
-      id: "79bc1d1a55fb4e3fa8dcbbaa4473e5ef",
-      title: "Best Songs, 2022",
-      img: `${process.env.URL}bestsongs2022.jpg`,
-    },
-    bestsongs2023: {
-      id: "1ab0b59be71c4602b4697f2f60426ad2",
-      title: "Best Songs, 2023",
-      img: `${process.env.URL}bestsongs2023.jpg`,
-    },
-  };
-  let id = params.id.toString().replaceAll("-", "");
+  const results = await fetch(`${process.env.URL}api/notion/lists`);
+  const items = await results.json();
+  const pages = Object.fromEntries(
+    items?.results.map((item) => [
+      item.properties.slug.rich_text[0].plain_text,
+      {
+        id: item.properties["page id"].rich_text[0].plain_text,
+        title: item.properties.title.title[0].plain_text,
+        img: `${process.env.URL}${item.properties["social image"].rich_text[0].plain_text}`,
+      },
+    ])
+  );
   const res = await fetch(
-    `${process.env.URL}api/notion/pages/${slugToId[id].id}`
+    `${process.env.URL}api/notion/pages/${pages[params.id].id}`
   );
   const list = await res.json();
   const linkRenderer = createBlockRenderer("text", (data, renderer) => {
@@ -132,8 +126,8 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       html,
-      title: slugToId[id].title,
-      socialImage: slugToId[id].img,
+      title: pages[params.id].title,
+      socialImage: pages[params.id].img,
     },
   };
 }
