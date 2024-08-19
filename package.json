@@ -9,8 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.19.6",
+    "@contentful/rich-text-types": "^16.3.5",
     "@notion-render/client": "^0.0.2",
     "@notionhq/client": "^2.2.3",
+    "contentful": "^10.8.7",
     "framer-motion": "^10.12.4",
     "next": "12.1.6",
     "react": "18.1.0",

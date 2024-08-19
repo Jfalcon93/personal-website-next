@@ -1,81 +1,68 @@
-import Dot from "./dot";
-import Icon from "./icons/icon";
+import { useEffect } from "react";
+import Rating from "./rating";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ListItem({
-  name,
+  title,
   url,
   category,
-  selectedCategory,
   date,
-  note,
+  summary,
+  rating,
 }) {
-  const colorObj = {
-    music: "hover:underline hover:decoration-sky-500",
-    books: "hover:underline hover:decoration-cyan-300",
-    writing: "hover:underline hover:decoration-indigo-400",
-    playlists: "hover:underline hover:decoration-purple-400",
-    professional: "hover:underline hover:decoration-orange-300",
-    projects: "hover:underline hover:decoration-blue-400",
-    anime: "hover:underline hover:decoration-red-300",
+  const color = {
+    music: "group-hover:text-sky-600",
+    books: "group-hover:text-cyan-600",
+    writing: "group-hover:text-indigo-600",
+    anime: "group-hover:text-red-600",
   };
-  const fixedClass = `px-2 py-0.5 md:w-fit md:text-sm text-xs`;
-  let addSvg = "";
-  if (name.includes("(Apple Music)")) {
-    name = name.replace("(Apple Music)", "");
-    addSvg = "apple";
-  } else if (name.includes("(YouTube)")) {
-    name = name.replace("(YouTube)", "");
-    addSvg = "youtube";
-  }
 
-  const isMobile = window.innerWidth < 768;
-  let listItem, linkMotion, dateMotion;
-  if (!isMobile) {
-    listItem = {
-      hidden: { opacity: 0 },
-      show: { opacity: 1 },
-    };
+  const fixedClass = `py-0.5 md:w-fit md:text-sm text-xs`;
 
-    linkMotion = {
-      rest: {
-        paddingLeft: 0,
-      },
-      hover: {
-        paddingLeft: 4,
-        transition: {
-          duration: 0.2,
-          type: "tween",
-          ease: "easeOut",
-        },
-      },
-    };
-
-    dateMotion = {
-      rest: { opacity: 0 },
-      hover: {
-        opacity: 1,
-        transition: {
-          duration: 0.2,
-          type: "tween",
-          ease: "easeIn",
-        },
-      },
-    };
-  }
+  const titleClass = `text-gray-500 ${color[category]}`;
 
   let formattedDate = (date) => {
-    if (date === "") {
-      return "Ongoing";
-    }
     let arr = date.split("-");
     return `${arr[1]}/${arr[0].slice(2, 4)}`;
+  };
+
+  let listItem, linkMotion, dateMotion;
+
+  listItem = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+  };
+
+  linkMotion = {
+    rest: {
+      paddingLeft: 0,
+    },
+    hover: {
+      paddingLeft: 4,
+      transition: {
+        duration: 0.2,
+        type: "tween",
+        ease: "easeOut",
+      },
+    },
+  };
+
+  dateMotion = {
+    rest: { opacity: 0 },
+    hover: {
+      opacity: 1,
+      transition: {
+        duration: 0.2,
+        type: "tween",
+        ease: "easeIn",
+      },
+    },
   };
 
   return (
     <motion.li
       className={fixedClass}
-      key={name}
+      key={title}
       variants={listItem}
       layout
       layoutRoot
@@ -92,21 +79,18 @@ export default function ListItem({
       >
         <motion.span
           variants={dateMotion}
-          className="md:hidden pr-2 md:group-hover:inline text-gray-400"
+          className="md:hidden hidden md:pr-2 md:group-hover:inline text-gray-400"
         >
           {formattedDate(date)}
         </motion.span>
-        {name}
+        <span className={titleClass}>{title}</span>
         <motion.span
           variants={dateMotion}
           className="hidden pl-2 md:group-hover:inline text-gray-400"
         >
-          - {note}
+          - {summary}
+          {rating > 1 ? <Rating category={category} rating={rating} /> : ""}
         </motion.span>
-        {addSvg != "" ? <Icon category={selectedCategory} name={addSvg} /> : ""}
-        {category.map((item, i) => {
-          return <Dot key={i} category={item.name.toLowerCase()} />;
-        })}
       </motion.a>
     </motion.li>
   );
