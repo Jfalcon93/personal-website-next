@@ -3,6 +3,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import MainContainer from "../components/mainContainer";
 import { useEffect, useState } from "react";
+import { loadItems } from "../utils/contentful/api";
 
 export default function Home({ items, categories }) {
   const [filteredItems, setItems] = useState(items);
@@ -100,8 +101,7 @@ export default function Home({ items, categories }) {
 }
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.URL}api/contentful/items`);
-  const items = await res.json();
+  const items = await loadItems();
 
   const categoriesSet = new Set();
   for (const item of items.items) {

@@ -3,6 +3,7 @@ import Footer from "../../components/footer";
 import Head from "next/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+import { loadList } from "../../utils/contentful/api";
 
 export async function getStaticPaths() {
   const res = await fetch(`${process.env.URL}api/contentful/lists`);
@@ -91,10 +92,7 @@ export default function List({ title, socialImage, body }) {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(
-    `${process.env.URL}api/contentful/lists/${params.id}`
-  );
-  const lists = await res.json();
+  const lists = await loadList(params.id);
   const list = lists.items[0];
 
   return {
