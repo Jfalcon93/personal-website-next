@@ -3,11 +3,10 @@ import Footer from "../../components/footer";
 import Head from "next/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
-import { loadList } from "../../utils/contentful/api";
+import { loadList, loadLists } from "../../utils/contentful/api";
 
 export async function getStaticPaths() {
-  const res = await fetch(`${process.env.URL}api/contentful/lists`);
-  const lists = await res.json();
+  const lists = await loadLists();
 
   const paths = lists.items?.map((list) => ({
     params: {
