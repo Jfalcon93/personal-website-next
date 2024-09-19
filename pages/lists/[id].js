@@ -93,11 +93,12 @@ export default function List({ title, socialImage, body }) {
 export async function getStaticProps({ params }) {
   const lists = await loadList(params.id);
   const list = lists.items[0];
+  const thumbnail = `https:${list.fields.thumbnail.fields.file.url}`;
 
   return {
     props: {
       title: list.fields.title,
-      socialImage: list.fields.thumbnail.fields.file.url,
+      socialImage: thumbnail,
       body: list.fields.body,
     },
   };

@@ -11,15 +11,17 @@ export default function ListItem({
   rating,
 }) {
   const color = {
-    music: "group-hover:text-sky-600",
-    books: "group-hover:text-cyan-600",
-    writing: "group-hover:text-indigo-600",
-    anime: "group-hover:text-red-600",
+    music: "text-sky-600 md:text-gray-500 group-hover:text-sky-600",
+    books: "text-cyan-600 md:text-gray-500 group-hover:text-cyan-600",
+    writing: "text-indigo-600 md:text-gray-500 group-hover:text-indigo-600",
+    anime: "text-red-600 md:text-gray-500 group-hover:text-red-600",
   };
 
-  const fixedClass = `py-0.5 md:w-fit md:text-sm text-xs`;
+  const fixedClass = `py-1 md:py-0.5 md:w-fit md:text-sm text-xs`;
 
-  const titleClass = `text-gray-500 ${color[category]}`;
+  const titleClass = `${color[category]}`;
+
+  const target = url.includes("https://") ? "_blank" : "_self";
 
   let formattedDate = (date) => {
     let arr = date.split("-");
@@ -70,7 +72,7 @@ export default function ListItem({
       <motion.a
         className="flex items-center group"
         href={url}
-        target="_blank"
+        target={target}
         rel="noreferrer"
         variants={linkMotion}
         initial="rest"
