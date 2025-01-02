@@ -1,9 +1,10 @@
-import Header from "../../components/header";
-import Footer from "../../components/footer";
+import Header from "../../components/lists/header";
+import Footer from "../../components/lists/footer";
 import Head from "next/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { loadList, loadLists } from "../../utils/contentful/api";
+import Link from "next/link";
 
 export async function getStaticPaths() {
   const lists = await loadLists();
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
   };
 }
 
-export default function List({ title, socialImage, body }) {
+export default function List({ title, slug, socialImage, body }) {
   const OL = ({ children }) => (
     <ol className="list-decimal list-inside mb-4 marker:text-gray-400">
       {children}
@@ -37,7 +38,6 @@ export default function List({ title, socialImage, body }) {
     </a>
   );
 
-  const P = ({ children }) => <p className="mb-2">{children}</p>;
   const options = {
     renderNode: {
       [BLOCKS.OL_LIST]: (node, children) => <OL>{children}</OL>,
@@ -60,7 +60,15 @@ export default function List({ title, socialImage, body }) {
         return <HL uri={uri}>{children}</HL>;
       },
       [BLOCKS.PARAGRAPH]: (node, children) => {
-        return <P>{children}</P>;
+        const transformedChildren = documentToReactComponents(node, {
+          renderNode: {
+            [INLINES.HYPERLINK]: (node, children) => {
+              const uri = node.data.uri;
+              return <HL uri={uri}>{children}</HL>;
+            },
+          },
+        });
+        return <div className="mb-2">{transformedChildren}</div>;
       },
     },
   };
@@ -75,7 +83,7 @@ export default function List({ title, socialImage, body }) {
         <meta name="twitter:image" content={socialImage} />
       </Head>
       <div className="pt-3 mx-3 md:mx-6">
-        <Header category={"writing"} />
+        <Header category={"writing"} slug={slug} />
       </div>
       <div className="pt-2 mx-3 md:mx-6 min-h-screen">
         <h2 className="mt-2 md:mb-[-14px] mb-[-12px] text-gray-600 text-xs md:text-sm">
@@ -84,7 +92,7 @@ export default function List({ title, socialImage, body }) {
         <div className="mb-6 text-xs md:text-sm">
           {documentToReactComponents(body, options)}
         </div>
-        <Footer />
+        <Footer slug={slug} />
       </div>
     </>
   );
@@ -98,6 +106,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       title: list.fields.title,
+      slug: list.fields.slug,
       socialImage: thumbnail,
       body: list.fields.body,
     },

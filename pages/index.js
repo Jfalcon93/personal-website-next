@@ -94,6 +94,7 @@ export default function Home({ items, categories }) {
       <MainContainer
         items={searchInput !== "" ? searchedItems : filteredItems}
         categories={categories}
+        category={selectedCategory}
       />
       <Footer />
     </main>

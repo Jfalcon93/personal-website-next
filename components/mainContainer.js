@@ -1,11 +1,13 @@
 import Head from "next/head";
 import ListItem from "./listItem";
 import { useEffect, useState } from "react";
+import Conditional from "./conditional";
+import Music from "./music";
 
-export default function MainContainer({ items, categories }) {
+export default function MainContainer({ items, categories, category }) {
   return (
     <div className="my-4 md:my-6">
-      {items && (
+      <Conditional showWhen={category !== "music"}>
         <>
           <ul>
             {items?.map((item, i) => {
@@ -31,7 +33,10 @@ export default function MainContainer({ items, categories }) {
             })}
           </ul>
         </>
-      )}
+      </Conditional>
+      <Conditional showWhen={category === "music"}>
+        <Music items={items}></Music>
+      </Conditional>
     </div>
   );
 }
