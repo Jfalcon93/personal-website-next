@@ -44,6 +44,13 @@ export default function Footer({ slug }) {
             >
               <Link href="/lists/best-songs-2024"> [ 24 ] </Link>
             </li>
+            <li
+              className={`mr-4 hover:text-indigo-600 ${
+                slug === "best-songs-2025" ? "text-indigo-600" : ""
+              }`}
+            >
+              <Link href="/lists/best-songs-2025"> [ 25 ] </Link>
+            </li>
           </ul>
         </li>
         <li className="transition duration-300 ease-in-out hover:text-indigo-500">
