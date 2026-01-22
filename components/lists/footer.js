@@ -24,20 +24,22 @@ export default function Footer({ slug, yearLinks = [] }) {
         </li>
         <li className="flex items-center justify-center space-x-2 flex-shrink-0">
           {hasPrevious ? (
-            <Link href={`/lists/${previousYear}`}>
-              <a className="text-gray-400 hover:text-indigo-600 transition duration-300 ease-in-out">
-                &larr;
-              </a>
+            <Link
+              href={`/lists/${previousYear}`}
+              className="text-gray-400 hover:text-indigo-600 transition duration-300 ease-in-out"
+            >
+              &larr;
             </Link>
           ) : (
             <span className="text-transparent select-none">&larr;</span>
           )}
           <span className="text-indigo-600 text-xs md:text-sm">[ {shortYear} ]</span>
           {hasNext ? (
-            <Link href={`/lists/${nextYear}`}>
-              <a className="text-gray-400 hover:text-indigo-600 transition duration-300 ease-in-out">
-                &rarr;
-              </a>
+            <Link
+              href={`/lists/${nextYear}`}
+              className="text-gray-400 hover:text-indigo-600 transition duration-300 ease-in-out"
+            >
+              &rarr;
             </Link>
           ) : (
             <span className="text-transparent select-none">&rarr;</span>
