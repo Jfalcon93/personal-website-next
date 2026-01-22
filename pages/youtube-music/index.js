@@ -1,6 +1,6 @@
 import Header from "../../components/lists/header";
 import Head from "next/head";
-import { useYouTubePlaylistRSS } from "./youtubeRss";
+import { useYouTubePlaylistRSS } from "../../utils/youtubeRss";
 import ListItem from "../../components/listItem";
 
 export default function YoutubeMusic({ title, slug }) {
