@@ -13,7 +13,6 @@ export async function loadLists() {
     });
     return response;
   } catch (error) {
-    console.log(error.body);
   }
 }
 
@@ -27,7 +26,6 @@ export async function loadItems() {
     });
     return response;
   } catch (error) {
-    console.log(error.body);
   }
 }
 
@@ -39,6 +37,5 @@ export async function loadList(id) {
     });
     return response;
   } catch (error) {
-    console.log(error.body);
   }
 }

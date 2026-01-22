@@ -1,6 +1,11 @@
-import { useEffect } from "react";
 import Rating from "./rating";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import {
+  listItemVariants,
+  linkMotionVariants,
+  dateMotionVariants,
+  formatDate,
+} from "../utils/theme";
 
 export default function ListItem({
   title,
@@ -10,62 +15,34 @@ export default function ListItem({
   summary,
   rating,
 }) {
-  const color = {
-    music: "text-sky-600 md:text-gray-500 group-hover:text-sky-600",
-    books: "text-cyan-600 md:text-gray-500 group-hover:text-cyan-600",
-    writing: "text-indigo-600 md:text-gray-500 group-hover:text-indigo-600",
-    anime: "text-red-600 md:text-gray-500 group-hover:text-red-600",
-  };
-
-  const fixedClass = `py-1 md:py-0.5 md:w-fit md:text-sm text-xs`;
-
-  const titleClass = `${color[category]}`;
-
   const target = url.includes("https://") ? "_blank" : "_self";
 
-  let formattedDate = (date) => {
-    let arr = date.split("-");
-    return `${arr[1]}/${arr[0].slice(2, 4)}`;
-  };
+  // Get the first element if category is an array
+  const cat = Array.isArray(category) ? category[0] : category;
 
-  let listItem, linkMotion, dateMotion;
+  // Determine classes based on category
+  const getTitleClasses = () => {
+    const baseClasses = "md:text-gray-500";
 
-  listItem = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
-  };
-
-  linkMotion = {
-    rest: {
-      paddingLeft: 0,
-    },
-    hover: {
-      paddingLeft: 4,
-      transition: {
-        duration: 0.2,
-        type: "tween",
-        ease: "easeOut",
-      },
-    },
-  };
-
-  dateMotion = {
-    rest: { opacity: 0 },
-    hover: {
-      opacity: 1,
-      transition: {
-        duration: 0.2,
-        type: "tween",
-        ease: "easeIn",
-      },
-    },
+    switch (cat) {
+      case "music":
+        return `${baseClasses} text-sky-600 md:group-hover:text-sky-600`;
+      case "books":
+        return `${baseClasses} text-cyan-600 md:group-hover:text-cyan-600`;
+      case "writing":
+        return `${baseClasses} text-indigo-600 md:group-hover:text-indigo-600`;
+      case "anime":
+        return `${baseClasses} text-red-600 md:group-hover:text-red-600`;
+      default:
+        return `${baseClasses} text-gray-600 md:group-hover:text-gray-600`;
+    }
   };
 
   return (
     <motion.li
-      className={fixedClass}
+      className="py-1 md:py-0.5 md:w-fit md:text-sm text-xs"
       key={title}
-      variants={listItem}
+      variants={listItemVariants}
       layout
       layoutRoot
     >
@@ -74,20 +51,20 @@ export default function ListItem({
         href={url}
         target={target}
         rel="noreferrer"
-        variants={linkMotion}
+        variants={linkMotionVariants}
         initial="rest"
         whileHover="hover"
         animate="rest"
       >
         <motion.span
-          variants={dateMotion}
+          variants={dateMotionVariants}
           className="md:hidden hidden md:pr-2 md:group-hover:inline text-gray-400"
         >
-          {formattedDate(date)}
+          {formatDate(date)}
         </motion.span>
-        <span className={titleClass}>{title}</span>
+        <span className={getTitleClasses()}>{title}</span>
         <motion.span
-          variants={dateMotion}
+          variants={dateMotionVariants}
           className="hidden pl-2 md:group-hover:inline text-gray-400"
         >
           - {summary}

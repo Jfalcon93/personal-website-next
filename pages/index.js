@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import MainContainer from "../components/mainContainer";
@@ -37,15 +36,7 @@ export default function Home({ items, categories }) {
     setSearchedItems(searchedItems);
   };
   const filterItems = (items, option) => {
-    let filter = items.map((item) => {
-      if (item.fields.category[0] === option) {
-        return item;
-      }
-    });
-    let filter2 = filter.filter((item) => {
-      return item !== undefined;
-    });
-    return filter2;
+    return items.filter((item) => item.fields.category[0] === option);
   };
   const selectRating = (option) => {
     let sortedByRating = filteredItems.sort((a, b) =>

@@ -1,6 +1,4 @@
-import Head from "next/head";
-
-export default function Footer({ items }) {
+export default function Footer() {
   return (
     <div className="sticky top-[100vh] px-0 pb-4 text-gray-600">
       <ul className="text-xs md:text-sm flex flex-row justify-between tracking-tight md:tracking-normal space-x-1 md:space-x-2">

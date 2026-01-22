@@ -1,10 +1,8 @@
-import Head from "next/head";
 import ListItem from "./listItem";
-import { useEffect, useState } from "react";
 import Conditional from "./conditional";
 import Music from "./music";
 
-export default function MainContainer({ items, categories, category }) {
+export default function MainContainer({ items, category }) {
   return (
     <div className="my-4 md:my-6">
       <Conditional showWhen={category !== "music"}>

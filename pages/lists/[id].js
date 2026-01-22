@@ -4,7 +4,6 @@ import Head from "next/head";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import { loadList, loadLists } from "../../utils/contentful/api";
-import Link from "next/link";
 
 export async function getStaticPaths() {
   const lists = await loadLists();
@@ -20,7 +19,7 @@ export async function getStaticPaths() {
   };
 }
 
-export default function List({ title, slug, socialImage, body }) {
+export default function List({ title, slug, socialImage, body, yearLinks }) {
   const OL = ({ children }) => (
     <ol className="list-decimal list-inside mb-4 marker:text-gray-400">
       {children}
@@ -40,12 +39,12 @@ export default function List({ title, slug, socialImage, body }) {
 
   const options = {
     renderNode: {
-      [BLOCKS.OL_LIST]: (node, children) => <OL>{children}</OL>,
-      [BLOCKS.LIST_ITEM]: (node, children) => {
+      [BLOCKS.OL_LIST]: (_node, children) => <OL>{children}</OL>,
+      [BLOCKS.LIST_ITEM]: (node, _children) => {
         const transformedChildren = documentToReactComponents(node, {
           renderNode: {
-            [BLOCKS.PARAGRAPH]: (node, children) => children,
-            [BLOCKS.LIST_ITEM]: (node, children) => children,
+            [BLOCKS.PARAGRAPH]: (_node, children) => children,
+            [BLOCKS.LIST_ITEM]: (_node, children) => children,
             [INLINES.HYPERLINK]: (node, children) => {
               const uri = node.data.uri;
 
@@ -56,10 +55,10 @@ export default function List({ title, slug, socialImage, body }) {
         return <li className="mb-1">{transformedChildren}</li>;
       },
       [INLINES.HYPERLINK]: (node, children) => {
-        const { uri } = node.data.uri;
+        const uri = node.data.uri;
         return <HL uri={uri}>{children}</HL>;
       },
-      [BLOCKS.PARAGRAPH]: (node, children) => {
+      [BLOCKS.PARAGRAPH]: (node, _children) => {
         const transformedChildren = documentToReactComponents(node, {
           renderNode: {
             [INLINES.HYPERLINK]: (node, children) => {
@@ -92,7 +91,7 @@ export default function List({ title, slug, socialImage, body }) {
         <div className="mb-6 text-xs md:text-sm">
           {documentToReactComponents(body, options)}
         </div>
-        <Footer slug={slug} />
+        <Footer slug={slug} yearLinks={yearLinks} />
       </div>
     </>
   );
@@ -103,12 +102,20 @@ export async function getStaticProps({ params }) {
   const list = lists.items[0];
   const thumbnail = `https:${list.fields.thumbnail.fields.file.url}`;
 
+  // Load all lists to get available years
+  const allLists = await loadLists();
+  const yearLinks = allLists.items
+    ?.filter((item) => item.fields.slug?.startsWith("best-songs-"))
+    .map((item) => item.fields.slug)
+    .sort();
+
   return {
     props: {
       title: list.fields.title,
       slug: list.fields.slug,
       socialImage: thumbnail,
       body: list.fields.body,
+      yearLinks: yearLinks || [],
     },
   };
 }
