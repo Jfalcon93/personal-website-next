@@ -1,12 +1,28 @@
 import Header from "../../components/lists/header";
 import Head from "next/head";
-import { useYouTubePlaylistRSS } from "../../utils/youtubeRss";
+import { useYouTubePlaylist } from "../../utils/useYouTubePlaylist";
 import ListItem from "../../components/listItem";
 
-export default function YoutubeMusic({ title, slug }) {
-  const { videos, loading, error } = useYouTubePlaylistRSS(
-    "PLTkaDAEbM3siPfBEpQCulhC2gIMKBncP4"
-  );
+export default function YoutubeMusic({ title, slug, playlistId }) {
+  const { videos, loading, error } = useYouTubePlaylist(playlistId);
+
+  // Group videos by date (ignoring time)
+  const groupedVideos = videos.reduce((groups, video) => {
+    if (!video.publishedAt) return groups;
+
+    const date = new Date(video.publishedAt);
+    const dateKey = date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
+    if (!groups[dateKey]) {
+      groups[dateKey] = [];
+    }
+    groups[dateKey].push(video);
+    return groups;
+  }, {});
 
   return (
     <>
@@ -25,19 +41,34 @@ export default function YoutubeMusic({ title, slug }) {
           {loading && <p>Loading...</p>}
           {error && <p style={{ color: "red" }}>{error}</p>}
 
-          <ul className="">
-            {videos.map((video) => (
-              <ListItem
-                key={video.id}
-                date={video.publishedAt != null ? video.publishedAt : ""}
-                title={video.title}
-                url={`https://www.youtube.com/watch?v=${video.id}`}
-                category={["music"]}
-              />
-            ))}
-          </ul>
+          {Object.entries(groupedVideos).map(([dateKey, dateVideos]) => (
+            <div key={dateKey} className="mb-8">
+              <div className="text-gray-700 font-medium text-sm md:text-base mb-2 mt-6">
+                {dateKey}
+              </div>
+              <ul className="">
+                {dateVideos.map((video) => (
+                  <ListItem
+                    key={video.id}
+                    date={video.publishedAt != null ? video.publishedAt : ""}
+                    title={video.title}
+                    url={`https://www.youtube.com/watch?v=${video.id}`}
+                    category={["music"]}
+                  />
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      playlistId: process.env.YOUTUBE_PLAYLIST_ID,
+    },
+  };
 }
